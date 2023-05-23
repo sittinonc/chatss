@@ -4,7 +4,7 @@ export interface IUser {
   username: string;
   hashed_password: string;
   salt: string;
-  profile_image?: string;
+  profile_image: string | null;
 }
 
 export interface IChat {
