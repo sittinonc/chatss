@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ChatController } from '../controllers/ChatController';
+const bodyParser = require('body-parser');
 
 export class ChatRouter {
   public router: Router;
@@ -11,5 +12,16 @@ export class ChatRouter {
     this.initEndpoints();
   }
 
-  private initEndpoints(): void {}
+  private initEndpoints(): void {
+    this.router.get(
+      '/:chatid',
+      bodyParser.json(),
+      this.chatController.getChatById
+    );
+    this.router.post(
+      '/create/:useraid/:userbid',
+      bodyParser.json(),
+      this.chatController.createChat
+    );
+  }
 }

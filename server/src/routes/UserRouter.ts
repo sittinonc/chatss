@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/UserController';
 
+const bodyParser = require('body-parser');
+
 export class UserRouter {
   public router: Router;
   private userController: UserController;
@@ -12,8 +14,16 @@ export class UserRouter {
   }
 
   private initEndpoints(): void {
-    this.router.post('/register', this.userController.register);
-    this.router.post('/login', this.userController.login);
-    this.router.post('/logout', this.userController.logout);
+    this.router.get('/:username', this.userController.getUserByUsername);
+    this.router.post(
+      '/create',
+      bodyParser.json(),
+      this.userController.createUser
+    );
+    this.router.put(
+      '/:username/update',
+      bodyParser.json(),
+      this.userController.updateUser
+    );
   }
 }

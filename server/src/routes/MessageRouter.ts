@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { MessageController } from '../controllers/MessageController';
+const bodyParser = require('body-parser');
 
 export class MessageRouter {
   public router: Router;
@@ -11,5 +12,11 @@ export class MessageRouter {
     this.initEndpoints();
   }
 
-  private initEndpoints(): void {}
+  private initEndpoints(): void {
+    this.router.post(
+      '/send',
+      bodyParser.json(),
+      this.messageController.sendMessage
+    );
+  }
 }
