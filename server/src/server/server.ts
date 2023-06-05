@@ -1,5 +1,4 @@
 import express, { Express, Router } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { UserRouter } from '../routes/UserRouter';
 import { ChatRouter } from '../routes/ChatRouter';
 import { MessageRouter } from '../routes/MessageRouter';
@@ -19,6 +18,7 @@ export class Server {
     messageController: MessageController
   ) {
     this.app = express();
+    this.app.use(express.json());
     this.initControllers(userController, chatController, messageController);
     this.initRoutes();
   }
